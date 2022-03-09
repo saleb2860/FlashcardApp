@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import com.wajahatkarim3.roomexplorer.RoomExplorer;
+import com.android.volley.RequestQueue
 
 import java.util.List;
 public class MainActivity extends Activity {
@@ -21,6 +22,28 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        String URL="http://localhost:8080";
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        JsonObjectRequest objectRequest=new JsonObjectRequest(Request.Method.GET, 
+                                                              URL, 
+                                                              null, 
+                                                              new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.e("Rest Response", response.toString());
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("Rest Response", response.toString());
+                }
+            }
+            );
+        requestQueue.add(objectRequest);
+        
+        
         flashcardDatabase = new FlashcardDatabase(getApplicationContext());
         allFlashcards = flashcardDatabase.getAllCards();
         Log.d("MainActivity", "onCreate: " + allFlashcards);
