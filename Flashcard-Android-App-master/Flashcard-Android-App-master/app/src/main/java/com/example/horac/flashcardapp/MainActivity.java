@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        String URL="http://localhost:8080";
+        String URL="https://calebf-s.me/authors.json";
         RequestQueue requestQueue=Volley.newRequestQueue(this);
         JsonObjectRequest objectRequest=new JsonObjectRequest(Request.Method.GET, 
                                                               URL, 
